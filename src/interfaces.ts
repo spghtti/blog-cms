@@ -16,6 +16,7 @@ export interface BlogPost {
   tags: string[];
   views: number;
   comments: object[];
+  isPublished: boolean;
 }
 
 export interface ICommentProps {

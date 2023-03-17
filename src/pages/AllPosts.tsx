@@ -31,7 +31,7 @@ export function AllPosts(): ReactElement {
       })
       .then((data) => setList(data))
       .catch((err) => {
-        err.name === 'AbortError' || setErr('Error retrieving posts.');
+        err.name !== 'AbortError' && setErr('Error retrieving posts.');
       });
     return () => abortController.abort();
   }, []);

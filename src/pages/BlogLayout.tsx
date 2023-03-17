@@ -1,18 +1,56 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { BlogPost } from '../interfaces';
 import { ICommentProps } from '../interfaces';
-import { FormattedDate } from '../components/FormattedDate';
 import { Comment } from '../components/Comment';
+import { FormEvent } from 'react';
 
 // TODO: Increment view on page load
 
 export function BlogLayout() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [post, setPost] = useState<BlogPost>();
   const [err, setErr] = useState('');
+
+  function updatePost(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = {
+      title: (document.getElementById('title') as HTMLInputElement).value,
+      tags: (document.getElementById('tags') as HTMLInputElement).value.split(
+        ','
+      ),
+      body: (document.getElementById('body') as HTMLInputElement).value,
+      // prettier-ignore
+      isPublished: (document.getElementById('isPublished') as HTMLInputElement)
+        .checked,
+    };
+    fetch(`http://localhost:5000/posts/${id}/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      mode: 'cors',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setErr(
+            `Error: ${response.statusText} (${response.status.toString()})`
+          );
+        } else {
+          response.json();
+          navigate(0);
+        }
+      })
+      .catch((err) => {
+        setErr(err);
+      });
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,24 +69,40 @@ export function BlogLayout() {
     <div>
       <Header />
       <main>
-        {err && <div className="error">Error fetching post.</div>}
+        <div className="error">{err}</div>
         {post && (
-          <article className="blog-post">
-            <h1 className="post-title">{post.title}</h1>
-            <span className="post-date">
-              <FormattedDate date={post.date} />
-            </span>
-            {post.updated && (
-              <span className="post-date">
-                Updated on <FormattedDate date={post.date} />
-              </span>
-            )}
-            <ul className="post-tags">
-              {post.tags.map((tag: string, i) => (
-                <li key={i}>{tag}</li>
-              ))}
-            </ul>
-            <article className="post-body">{post.body}</article>
+          <div className="blog-post-wrapper">
+            <form className="blog-form" onSubmit={updatePost}>
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                defaultValue={post.title}
+              />
+              <label htmlFor="tags">Tags (e.g Javascript,HTML,React)</label>
+              <input
+                type="text"
+                name="tags"
+                id="tags"
+                defaultValue={[...post.tags]}
+              />
+              <label htmlFor="body">Body</label>
+              <textarea
+                className="post-body"
+                id="body"
+                name="body"
+                defaultValue={post.body}
+              ></textarea>
+              <label htmlFor="isPublished">Published</label>
+              <input
+                type="checkbox"
+                name="isPublished"
+                id="isPublished"
+                defaultChecked={post.isPublished === true}
+              />
+              <input type="submit" value="Update post" readOnly />
+            </form>
             <div className="comment-section">
               <h1 className="comment-section-headline">Comments</h1>
               <div className="comment-wrapper">
@@ -64,7 +118,7 @@ export function BlogLayout() {
                 </ul>
               </div>
             </div>
-          </article>
+          </div>
         )}
       </main>
     </div>
