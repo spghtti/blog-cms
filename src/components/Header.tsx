@@ -7,7 +7,6 @@ export const Header = () => {
       <nav>
         <NavLink to="/">Write a post</NavLink>
         <NavLink to="/posts">All posts</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
         {checkLogin() ? (
           <NavLink to="/logout">Logout</NavLink>
         ) : (

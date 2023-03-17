@@ -9,17 +9,31 @@ export function AllPosts(): ReactElement {
   const [err, setErr] = useState('');
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
+    const abortController = new AbortController();
+    const signal = abortController.signal;
 
-    fetch('http://localhost:5000/posts', { signal })
-      .then((response) => response.json())
+    fetch('http://localhost:5000/posts/all', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      mode: 'cors',
+      referrerPolicy: 'no-referrer',
+      signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setErr(
+            `Error: ${response.statusText} (${response.status.toString()})`
+          );
+        }
+        return response.json();
+      })
       .then((data) => setList(data))
       .catch((err) => {
         err.name === 'AbortError' || setErr('Error retrieving posts.');
       });
-
-    return () => controller.abort();
+    return () => abortController.abort();
   }, []);
 
   return (

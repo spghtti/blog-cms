@@ -6,10 +6,12 @@ export function Home(): ReactElement {
   return (
     <div>
       <Header />
-      {checkLogin() && (
+      {checkLogin() ? (
         <main>
           <p>THis is home</p>
         </main>
+      ) : (
+        <p className="error">You must login.</p>
       )}
     </div>
   );
