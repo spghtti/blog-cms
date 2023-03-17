@@ -1,10 +1,10 @@
-import { useState, createContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
 import { useNavigate } from 'react-router-dom';
 import { Logout } from './pages/Logout';
+import { BlogLayout } from './pages/BlogLayout';
 
 import './App.css';
 import { AllPosts } from './pages/AllPosts';
@@ -19,14 +19,17 @@ function App() {
 
   function logoutAccount() {
     localStorage.clear();
-    navigate('/');
+    navigate('/login');
   }
 
   return (
     <Routes>
-      <Route path="/" element={<Login loginAccount={loginAccount} />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/posts" element={<AllPosts />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login loginAccount={loginAccount} />} />
+      <Route path="posts">
+        <Route index={true} element={<AllPosts />} />
+        <Route path=":id" element={<BlogLayout />} />
+      </Route>
       <Route
         path="/logout"
         element={<Logout logoutAccount={logoutAccount} />}

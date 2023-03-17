@@ -27,7 +27,7 @@ export function Login(props: loginInterface) {
           navigate(0);
         } else {
           props.loginAccount(res.token);
-          navigate('/home');
+          navigate('/');
         }
       })
       .catch((err) => {
@@ -37,7 +37,7 @@ export function Login(props: loginInterface) {
 
   return (
     <div>
-      {!checkLogin() && (
+      {!checkLogin() ? (
         <main>
           <form onSubmit={loginPost}>
             <label htmlFor="email">email</label>
@@ -47,6 +47,8 @@ export function Login(props: loginInterface) {
             <input type="submit" id="submit" />
           </form>
         </main>
+      ) : (
+        <p className="error">You're already logged in</p>
       )}
     </div>
   );

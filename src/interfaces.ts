@@ -15,4 +15,14 @@ export interface BlogPost {
   _id: string;
   tags: string[];
   views: number;
+  comments: object[];
+}
+
+export interface ICommentProps {
+  name: string;
+  body: string;
+  _id: string;
+  date: string;
+  email: string;
+  postId: string;
 }
