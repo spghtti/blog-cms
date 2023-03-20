@@ -17,7 +17,7 @@ export function PostPreview({ post }: { post: BlogPost }) {
           ))}
         </ul>
         <p className="preview-text">{post.preview}</p>
-        <a className="read-more-link" href={`/blog/${post._id}`}>
+        <a className="read-more-link" href={`/posts/${post._id}`}>
           Read more
         </a>
       </div>

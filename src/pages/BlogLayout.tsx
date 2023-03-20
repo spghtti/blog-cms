@@ -23,6 +23,7 @@ export function BlogLayout() {
         ','
       ),
       body: (document.getElementById('body') as HTMLInputElement).value,
+      preview: (document.getElementById('preview') as HTMLInputElement).value,
       // prettier-ignore
       isPublished: (document.getElementById('isPublished') as HTMLInputElement)
         .checked,
@@ -79,6 +80,15 @@ export function BlogLayout() {
                 name="title"
                 id="title"
                 defaultValue={post.title}
+                minLength={3}
+              />
+              <label htmlFor="preview">Preview</label>
+              <input
+                type="text"
+                name="preview"
+                id="preview"
+                defaultValue={post.preview}
+                minLength={3}
               />
               <label htmlFor="tags">Tags (e.g Javascript,HTML,React)</label>
               <input
@@ -86,6 +96,7 @@ export function BlogLayout() {
                 name="tags"
                 id="tags"
                 defaultValue={[...post.tags]}
+                minLength={3}
               />
               <label htmlFor="body">Body</label>
               <textarea
