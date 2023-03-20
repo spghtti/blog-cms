@@ -39,15 +39,17 @@ export function AllPosts(): ReactElement {
   return (
     <div>
       <Header />
-      {err.length ? (
-        <div className="error">{err}</div>
-      ) : (
-        <div className="post-list">
-          {list.map((post: BlogPost) => (
-            <PostPreview key={post._id} post={post} />
-          ))}
-        </div>
-      )}
+      <main>
+        {err.length ? (
+          <div className="error">{err}</div>
+        ) : (
+          <div className="post-list">
+            {list.map((post: BlogPost) => (
+              <PostPreview key={post._id} post={post} />
+            ))}
+          </div>
+        )}
+      </main>
     </div>
   );
 }

@@ -99,52 +99,57 @@ export function BlogLayout() {
         {post && (
           <div className="blog-post-wrapper">
             <form className="blog-form" onSubmit={updatePost}>
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                defaultValue={post.title}
-                minLength={3}
-              />
-              <label htmlFor="preview">Preview</label>
-              <input
-                type="text"
-                name="preview"
-                id="preview"
-                defaultValue={post.preview}
-                minLength={3}
-              />
-              <label htmlFor="tags">Tags (e.g Javascript,HTML,React)</label>
-              <input
-                type="text"
-                name="tags"
-                id="tags"
-                defaultValue={[...post.tags]}
-                minLength={3}
-              />
-              <label htmlFor="body">Body</label>
-              <textarea
-                className="post-body"
-                id="body"
-                name="body"
-                defaultValue={post.body}
-              ></textarea>
-              <label htmlFor="isPublished">Published</label>
-              <input
-                type="checkbox"
-                name="isPublished"
-                id="isPublished"
-                defaultChecked={post.isPublished === true}
-              />
+              <div className="form-item-container">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  defaultValue={post.title}
+                  minLength={3}
+                />
+              </div>
+              <div className="form-item-container">
+                <label htmlFor="preview">Preview</label>
+                <input
+                  type="text"
+                  name="preview"
+                  id="preview"
+                  defaultValue={post.preview}
+                  minLength={3}
+                />
+              </div>
+              <div className="form-item-container">
+                <label htmlFor="tags">Tags (e.g Javascript,HTML,React)</label>
+                <input
+                  type="text"
+                  name="tags"
+                  id="tags"
+                  defaultValue={[...post.tags]}
+                  minLength={3}
+                />
+              </div>
+              <div className="form-item-container">
+                <label htmlFor="body">Body</label>
+                <textarea
+                  className="post-body"
+                  id="body"
+                  name="body"
+                  rows={20}
+                  defaultValue={post.body}
+                ></textarea>
+              </div>
+
+              <div className="checkbox-container">
+                <label htmlFor="isPublished">Published</label>
+                <input
+                  type="checkbox"
+                  name="isPublished"
+                  id="isPublished"
+                  defaultChecked={post.isPublished === true}
+                />
+              </div>
               <input type="submit" value="Update post" readOnly />
-              <button
-                onClick={() => {
-                  deletePost(id as string);
-                }}
-              >
-                Delete post
-              </button>
             </form>
             <div className="comment-section">
               <h1 className="comment-section-headline">Comments</h1>
@@ -163,6 +168,14 @@ export function BlogLayout() {
             </div>
           </div>
         )}
+        <button
+          className="delete-post delete-button"
+          onClick={() => {
+            deletePost(id as string);
+          }}
+        >
+          Delete post
+        </button>
       </main>
     </div>
   );

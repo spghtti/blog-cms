@@ -119,3 +119,71 @@ main {
   display: flex;
   flex-direction: column;
 }
+label {
+  font-weight: 700;
+}
+.form-item-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.checkbox-container {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.delete-button {
+  color: white;
+  background-color: red;
+  border: 1px solid gray;
+  font-size: 0.8rem;
+}
+.delete-post {
+  margin-top: 500px;
+}
+.post-preview {
+  display: flex;
+  justify-content: space-between;
+  min-height: 125px;
+  max-height: 500px;
+  border-radius: 25px;
+  color: var(--font-color-main);
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+}
+
+.preview-date {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.preview-title {
+  font-size: 1.1rem;
+  font-style: bold;
+  font-weight: 800;
+}
+.preview-title:hover {
+  text-decoration: underline;
+}
+.preview-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.post-tags {
+  margin: 0.5rem 0;
+}
+.post-tags > li {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 0.5rem;
+  /* border: 1px solid black; */
+  color: white;
+  background-color: rgb(12, 14, 14);
+  padding: 0 0.5rem;
+  border-radius: 25px;
+}
+.read-more-link {
+  font-weight: 600;
+}
+.read-more-link:hover {
+  text-decoration: underline;
+}

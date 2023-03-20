@@ -38,6 +38,7 @@ export function Comment(props: { comment: ICommentProps; postId: string }) {
       <p className="comment-body">{props.comment.body}</p>
       <div>
         <button
+          className="delete-button"
           onClick={() => {
             deleteComment(props.comment._id, props.postId);
           }}
