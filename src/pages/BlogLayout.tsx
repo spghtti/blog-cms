@@ -15,6 +15,31 @@ export function BlogLayout() {
   const [post, setPost] = useState<BlogPost>();
   const [err, setErr] = useState('');
 
+  function deletePost(id: string) {
+    fetch(`http://localhost:5000/posts/${id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      mode: 'cors',
+      referrerPolicy: 'no-referrer',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setErr(
+            `Error: ${response.statusText} (${response.status.toString()})`
+          );
+        } else {
+          response.json();
+          navigate('/posts');
+        }
+      })
+      .catch((err) => {
+        setErr(err);
+      });
+  }
+
   function updatePost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = {
@@ -113,6 +138,13 @@ export function BlogLayout() {
                 defaultChecked={post.isPublished === true}
               />
               <input type="submit" value="Update post" readOnly />
+              <button
+                onClick={() => {
+                  deletePost(id as string);
+                }}
+              >
+                Delete post
+              </button>
             </form>
             <div className="comment-section">
               <h1 className="comment-section-headline">Comments</h1>
