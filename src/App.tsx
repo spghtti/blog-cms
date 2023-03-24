@@ -5,6 +5,7 @@ import { NotFound } from './pages/NotFound';
 import { useNavigate } from 'react-router-dom';
 import { Logout } from './pages/Logout';
 import { BlogLayout } from './pages/BlogLayout';
+import dotenv from 'dotenv';
 
 import './App.css';
 import { AllPosts } from './pages/AllPosts';

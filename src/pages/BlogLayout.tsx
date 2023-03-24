@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { BlogPost } from '../interfaces';
 import { ICommentProps } from '../interfaces';
 import { Comment } from '../components/Comment';
 import { FormEvent } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 
 // TODO: Increment view on page load
 
 export function BlogLayout() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const editorRef = useRef<any>(null);
 
   const [post, setPost] = useState<BlogPost>();
   const [err, setErr] = useState('');
@@ -47,7 +49,7 @@ export function BlogLayout() {
       tags: (document.getElementById('tags') as HTMLInputElement).value.split(
         ','
       ),
-      body: (document.getElementById('body') as HTMLInputElement).value,
+      body: editorRef.current && editorRef.current.getContent(),
       preview: (document.getElementById('preview') as HTMLInputElement).value,
       // prettier-ignore
       isPublished: (document.getElementById('isPublished') as HTMLInputElement)
@@ -131,15 +133,54 @@ export function BlogLayout() {
               </div>
               <div className="form-item-container">
                 <label htmlFor="body">Body</label>
-                <textarea
-                  className="post-body"
+                <Editor
+                  tagName="body"
                   id="body"
-                  name="body"
-                  rows={20}
-                  defaultValue={post.body}
-                ></textarea>
+                  // initialValue={`<p>${post.body.toString()}</p>`}
+                  initialValue={post.body}
+                  tinymceScriptSrc={import.meta.env.VITE_TINYMCE_URL}
+                  onInit={(evt, editor) => (editorRef.current = editor)}
+                  init={{
+                    entity_encoding: 'numeric',
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                      'advlist',
+                      'autolink',
+                      'lists',
+                      'link',
+                      'image',
+                      'charmap',
+                      'anchor',
+                      'searchreplace',
+                      'visualblocks',
+                      'code',
+                      'fullscreen',
+                      'insertdatetime',
+                      'media',
+                      'table',
+                      'preview',
+                      'link',
+                      'codesample',
+                    ],
+                    codesample_languages: [
+                      { text: 'HTML/XML', value: 'markup' },
+                      { text: 'JavaScript', value: 'javascript' },
+                      { text: 'TypeScript', value: 'typescript' },
+                      { text: 'CSS', value: 'css' },
+                      { text: 'JSX', value: 'jsx' },
+                      { text: 'TSX', value: 'tsx' },
+                    ],
+                    toolbar:
+                      'undo redo | blocks | ' +
+                      'codesample link bold italic forecolor | alignleft aligncenter ' +
+                      'alignright alignjustify | bullist numlist outdent indent | ' +
+                      'removeformat',
+                    content_style:
+                      'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                  }}
+                />
               </div>
-
               <div className="checkbox-container">
                 <label htmlFor="isPublished">Published</label>
                 <input
