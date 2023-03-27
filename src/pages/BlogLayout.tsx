@@ -50,7 +50,7 @@ export function BlogLayout() {
       tags: (document.getElementById('tags') as HTMLInputElement).value.split(
         ','
       ),
-      body: editorRef.current && editorRef.current.getContent().serialize(),
+      body: editorRef.current && editorRef.current.getContent(),
       preview: (document.getElementById('preview') as HTMLInputElement).value,
       // prettier-ignore
       isPublished: (document.getElementById('isPublished') as HTMLInputElement)
