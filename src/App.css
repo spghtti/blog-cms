@@ -190,3 +190,10 @@ label {
 .read-more-link:hover {
   text-decoration: underline;
 }
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+.login-form > input {
+  margin-bottom: 1rem;
+}

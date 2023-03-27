@@ -12,9 +12,8 @@ export function PostPreview({ post }: { post: BlogPost }) {
           <FormattedDate date={post.date} />
         </span>
         <ul className="post-tags">
-          {post.tags.map((tag: string, i) => (
-            <li key={i}>{tag}</li>
-          ))}
+          {post.tags &&
+            post.tags.map((tag: string, i) => <li key={i}>{tag}</li>)}
         </ul>
         <p className="preview-text">{post.preview}</p>
         <a className="read-more-link" href={`/posts/${post._id}`}>

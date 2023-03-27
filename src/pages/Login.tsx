@@ -39,12 +39,12 @@ export function Login(props: loginInterface) {
     <div>
       {!checkLogin() ? (
         <main>
-          <form onSubmit={loginPost}>
+          <form onSubmit={loginPost} className="login-form">
             <label htmlFor="email">email</label>
             <input type="text" id="email" name="email" />
             <label htmlFor="password">password</label>
             <input type="password" id="password" name="password" />
-            <input type="submit" id="submit" />
+            <input type="submit" id="submit" value="Log in" />
           </form>
         </main>
       ) : (

@@ -6,6 +6,7 @@ import { ICommentProps } from '../interfaces';
 import { Comment } from '../components/Comment';
 import { FormEvent } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import parse from 'html-react-parser';
 
 // TODO: Increment view on page load
 
@@ -49,7 +50,7 @@ export function BlogLayout() {
       tags: (document.getElementById('tags') as HTMLInputElement).value.split(
         ','
       ),
-      body: editorRef.current && editorRef.current.getContent(),
+      body: editorRef.current && editorRef.current.getContent().serialize(),
       preview: (document.getElementById('preview') as HTMLInputElement).value,
       // prettier-ignore
       isPublished: (document.getElementById('isPublished') as HTMLInputElement)
@@ -136,8 +137,7 @@ export function BlogLayout() {
                 <Editor
                   tagName="body"
                   id="body"
-                  // initialValue={`<p>${post.body.toString()}</p>`}
-                  initialValue={post.body}
+                  initialValue={`${parse(post.body)}`}
                   tinymceScriptSrc={import.meta.env.VITE_TINYMCE_URL}
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   init={{
