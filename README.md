@@ -2,7 +2,7 @@
 
 ## About this project
 
-A custom content management system for my portfolio's blog. This is a solution to the Odin's Project's [assignment](https://www.theodinproject.com/lessons/nodejs-blog-api) to create a Blog API as part of its Full-Stack Javascript curriculum.
+A custom content management system for [my portfolio's blog](<(https://github.com/spghtti/portfolio)>). This is a solution to the Odin's Project's [assignment](https://www.theodinproject.com/lessons/nodejs-blog-api) to create a Blog API as part of its Full-Stack Javascript curriculum.
 
 ## Features
 
@@ -12,9 +12,6 @@ A custom content management system for my portfolio's blog. This is a solution t
 - Delete posts or comments
 
 ## Links
-
-- [Portfolio](https://github.com/spghtti/portfolio)
-- [Blog API](https://github.com/spghtti/blog-api)
 
 ## Run locally
 
@@ -28,6 +25,7 @@ npm run preview
 
 ## Built With
 
+- [My Blog API](https://github.com/spghtti/blog-api)
 - [React](https://react.dev/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
