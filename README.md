@@ -20,9 +20,10 @@ A custom content management system for my portfolio's blog. This is a solution t
 
 ```
 git clone https://github.com/spghtti/blog-cms.git
-cd project-name
+cd blog-cms
 npm install
-npm run start
+npm run build
+npm run preview
 ```
 
 ## Built With
