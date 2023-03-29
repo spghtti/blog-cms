@@ -1,2 +1,37 @@
 # blog-cms
-Content mangement system for my portfolio's blog
+
+## About this project
+
+A custom content management system for my portfolio's blog. This is a solution to the Odin's Project's [assignment](https://www.theodinproject.com/lessons/nodejs-blog-api) to create a Blog API as part of its Full-Stack Javascript curriculum.
+
+## Features
+
+- A rich WYSIWYG text editor for writing blog posts
+- Edit existing posts
+- Publish or unpublish posts
+- Delete posts or comments
+
+## Links
+
+- [Portfolio](https://github.com/spghtti/portfolio)
+- [Blog API](https://github.com/spghtti/blog-api)
+
+## Run locally
+
+```
+git clone https://github.com/spghtti/blog-cms.git
+cd project-name
+npm install
+npm run start
+```
+
+## Built With
+
+- [React](https://react.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [TinyMCE](https://www.tiny.cloud/tinymce/)
+
+## License
+
+Distributed under the MIT License. See LICENSE.txt for more information.
