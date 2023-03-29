@@ -19,7 +19,7 @@ export function BlogLayout() {
   const [err, setErr] = useState('');
 
   function deletePost(id: string) {
-    fetch(`http://localhost:5000/posts/${id}/`, {
+    fetch(`${import.meta.env.VITE_BLOG_API_URL}/posts/${id}/`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export function BlogLayout() {
       isPublished: (document.getElementById('isPublished') as HTMLInputElement)
         .checked,
     };
-    fetch(`http://localhost:5000/posts/${id}/`, {
+    fetch(`${import.meta.env.VITE_BLOG_API_URL}/posts/${id}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export function BlogLayout() {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(`http://localhost:5000/posts/${id}`)
+    fetch(`${import.meta.env.VITE_BLOG_API_URL}/posts/${id}`)
       .then((response) => response.json())
       .then((data) => setPost(data))
       .catch((err) => {

@@ -12,7 +12,7 @@ export function AllPosts(): ReactElement {
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    fetch('http://localhost:5000/posts/all', {
+    fetch(`${import.meta.env.VITE_BLOG_API_URL}/posts/all`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -22,6 +22,7 @@ export function AllPosts(): ReactElement {
       signal,
     })
       .then((response) => {
+        console.log(response);
         if (!response.ok) {
           setErr(
             `Error: ${response.statusText} (${response.status.toString()})`
@@ -31,7 +32,7 @@ export function AllPosts(): ReactElement {
       })
       .then((data) => setList(data))
       .catch((err) => {
-        err.name === 'AbortError' || setErr('Error retrieving posts.');
+        console.log(err);
       });
     return () => abortController.abort();
   }, []);

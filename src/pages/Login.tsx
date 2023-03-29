@@ -3,22 +3,28 @@ import { useNavigate } from 'react-router-dom';
 import { loginInterface } from '../interfaces';
 import { checkLogin } from '../checkLogin';
 
-// ? Remove dotenv if not used
+interface FormElements {
+  day: HTMLInputElement;
+  month: HTMLInputElement;
+  year: HTMLInputElement;
+}
 
 export function Login(props: loginInterface) {
   const navigate = useNavigate();
 
   async function loginPost(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log(e.target);
 
-    fetch(`http://www.localhost:5000/login`, {
+    fetch(`${import.meta.env.VITE_BLOG_API_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: e.target[0].value,
-        password: e.target[1].value,
+        email: (document.getElementById('email') as HTMLInputElement).value,
+        password: (document.getElementById('password') as HTMLInputElement)
+          .value,
       }),
     })
       .then((res) => res.json())

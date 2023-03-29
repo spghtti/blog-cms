@@ -3,15 +3,20 @@ import { FormattedDate } from '../components/FormattedDate';
 
 function deleteComment(commentId: string, postId: string) {
   const comment = document.getElementById(commentId);
-  fetch(`http://localhost:5000/posts/${postId}/comments/${commentId}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    mode: 'cors',
-    referrerPolicy: 'no-referrer',
-  })
+  fetch(
+    `${
+      import.meta.env.VITE_BLOG_API_URL
+    }/posts/${postId}/comments/${commentId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      mode: 'cors',
+      referrerPolicy: 'no-referrer',
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         console.log(
@@ -30,7 +35,7 @@ export function Comment(props: { comment: ICommentProps; postId: string }) {
   return (
     <li className="comment" id={props.comment._id}>
       <div className="comment-info">
-        <h1 className="comment-name">{props.comment.name}</h1>{' '}
+        <h1 className="comment-name">{props.comment.name}</h1>
         <span className="comment-date">
           <FormattedDate date={props.comment.date} />
         </span>
