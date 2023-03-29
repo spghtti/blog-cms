@@ -11,18 +11,6 @@ A custom content management system for [my portfolio's blog](<(https://github.co
 - Publish or unpublish posts
 - Delete posts or comments
 
-## Links
-
-## Run locally
-
-```
-git clone https://github.com/spghtti/blog-cms.git
-cd blog-cms
-npm install
-npm run build
-npm run preview
-```
-
 ## Built With
 
 - [My Blog API](https://github.com/spghtti/blog-api)
